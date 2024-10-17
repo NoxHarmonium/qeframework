@@ -115,7 +115,7 @@ void QEEmitter::emitDbConnectionChanged (const unsigned int variableIndex)
    //
    if (this->filter [fkConnected]) {
       isConnected = qca->getChannelIsConnected ();
-      QGenericArgument arg = QGenericArgument (Q_ARG (bool, isConnected));
+      auto arg = Q_ARG (bool, isConnected);
       meta->invokeMethod (this->owner, member, Qt::DirectConnection, arg);
    }
 }
@@ -182,7 +182,7 @@ void QEEmitter::emitDbValueChangedPrivate (const bool useFormmattedText,
    if (okay && this->filter [fkDouble]) {
       // Good to go - create required argument.
       //
-      QGenericArgument arg = QGenericArgument (Q_ARG (double, dValue));
+      auto arg = Q_ARG (double, dValue);
 
       meta->invokeMethod (this->owner, member, Qt::DirectConnection, arg);
    }
@@ -191,25 +191,25 @@ void QEEmitter::emitDbValueChangedPrivate (const bool useFormmattedText,
    //
    if (okay && this->filter [fkBool]) {
       const bool bValue = (dValue != 0.0);
-      QGenericArgument arg = QGenericArgument (Q_ARG (bool, bValue));
+      auto arg = Q_ARG (bool, bValue);
       meta->invokeMethod (this->owner, member, Qt::DirectConnection, arg);
    }
 
    const int iValue = value.toInt (&okay);
    if (okay && this->filter [fkInt]) {
-      QGenericArgument arg = QGenericArgument (Q_ARG (int, iValue));
+      auto arg = Q_ARG (int, iValue);
       meta->invokeMethod (this->owner, member, Qt::DirectConnection, arg);
    }
 
    if (okay && this->filter [fkLong]) {
       long lValue = (long) iValue;
-      QGenericArgument arg = QGenericArgument (Q_ARG (long, lValue));
+      auto arg = Q_ARG (long, lValue);
       meta->invokeMethod (this->owner, member, Qt::DirectConnection, arg);
    }
 
    const qlonglong llValue = value.toLongLong (&okay);
    if (okay && this->filter [fkLongLong]) {
-      QGenericArgument arg = QGenericArgument (Q_ARG (qlonglong, llValue));
+      auto arg = Q_ARG (qlonglong, llValue);
       meta->invokeMethod (this->owner, member, Qt::DirectConnection, arg);
    }
 
@@ -217,7 +217,7 @@ void QEEmitter::emitDbValueChangedPrivate (const bool useFormmattedText,
    //
    const QString sValue = useFormmattedText ? formattedText : value.toString ();
    if (this->filter [fkString]) {
-      QGenericArgument arg = QGenericArgument (Q_ARG (QString, sValue));
+      auto arg = Q_ARG (QString, sValue);
       meta->invokeMethod (this->owner, member, Qt::DirectConnection, arg);
    }
 }
