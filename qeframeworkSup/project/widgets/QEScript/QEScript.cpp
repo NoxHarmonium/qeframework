@@ -465,7 +465,7 @@ void QEScript::setScriptFile(QString pValue)
       {
          data = file->readAll();
          file->close();
-         flag = document.setContent(data);
+         flag = static_cast<bool>(document.setContent(data));
       }
       else
       {
@@ -498,7 +498,7 @@ void QEScript::setScriptText(QString pValue)
    if (scriptType == QE::SourceText)
    {
       document.clear();
-      if (document.setContent(scriptText) == false)
+      if (static_cast<bool>(document.setContent(scriptText)) == false)
       {
          rootElement = document.createElement("epicsqt");
          document.appendChild(rootElement);

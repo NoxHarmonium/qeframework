@@ -270,7 +270,7 @@ void QERecipe::setRecipeFile(QString pValue)
    {
       data = file->readAll();
       file->close();
-      flag = document.setContent(data);
+      flag = static_cast<bool>(document.setContent(data));
    }
    else
    {
